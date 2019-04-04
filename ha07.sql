@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2019 at 02:49 AM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Apr 02, 2019 at 07:46 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,83 +25,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `str_table`
+-- Table structure for table `tbl_post`
 --
 
-CREATE TABLE `str_table` (
-  `ID` int(11) NOT NULL,
-  `usrnme` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `SrviceType` varchar(20) NOT NULL,
-  `Firstnme` varchar(30) NOT NULL,
-  `LastNme` varchar(30) NOT NULL,
-  `Gender` varchar(12) NOT NULL,
-  `Birthday` varchar(20) NOT NULL,
-  `Address` text NOT NULL,
-  `EMail` varchar(70) NOT NULL,
-  `Contact` int(10) NOT NULL,
-  `Discribtion` varchar(250) NOT NULL,
-  `image` longblob NOT NULL,
-  `Verification_pasword` varchar(225) NOT NULL,
-  `Mode` varchar(10) NOT NULL,
-  `lastlogin` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_post` (
+  `postid` bigint(255) NOT NULL DEFAULT '0',
+  `userName` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
+  `serviceType` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `availability` time NOT NULL,
+  `price` float NOT NULL,
+  `postImg` varchar(3000) COLLATE utf8_unicode_ci NOT NULL,
+  `timespan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usr_table`
+-- Table structure for table `tbl_user`
 --
 
-CREATE TABLE `usr_table` (
-  `ID` int(11) NOT NULL,
-  `usrnme` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `Firstnme` varchar(30) NOT NULL,
-  `LastNme` varchar(30) NOT NULL,
-  `Gender` varchar(10) NOT NULL,
-  `Birthday` date NOT NULL,
-  `Address` text NOT NULL,
-  `EMail` varchar(70) NOT NULL,
-  `Contact` varchar(11) NOT NULL,
-  `Discribtion` varchar(250) NOT NULL,
-  `image` longblob NOT NULL,
-  `Verification_pasword` varchar(225) NOT NULL,
-  `Mode` varchar(10) NOT NULL,
-  `lastlogin` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_user` (
+  `userName` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `role` char(1) COLLATE utf8_unicode_ci NOT NULL,
+  `captchaCode` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `firstName` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `lastName` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `Gender` char(1) COLLATE utf8_unicode_ci NOT NULL,
+  `dateOfBirth` date NOT NULL,
+  `address` varchar(2500) COLLATE utf8_unicode_ci NOT NULL,
+  `verificaionCode` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `verified` int(11) NOT NULL DEFAULT '0',
+  `profileImg` varchar(3000) COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `timespan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `str_table`
+-- Indexes for table `tbl_user`
 --
-ALTER TABLE `str_table`
-  ADD PRIMARY KEY (`usrnme`);
-
---
--- Indexes for table `usr_table`
---
-ALTER TABLE `usr_table`
-  ADD PRIMARY KEY (`usrnme`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `str_table`
---
-ALTER TABLE `str_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `usr_table`
---
-ALTER TABLE `usr_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_user`
+  ADD KEY `userName` (`userName`(255));
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
